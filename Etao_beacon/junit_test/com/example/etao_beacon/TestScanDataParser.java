@@ -24,7 +24,9 @@ public class TestScanDataParser extends AndroidTestCase {
 	
 	public void testParseMajor(){
 		
+		System.out.println(mParser.getMajor(bytes));
 	}
+	
 
 
 }
