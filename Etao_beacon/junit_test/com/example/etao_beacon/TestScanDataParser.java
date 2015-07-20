@@ -32,5 +32,7 @@ public class TestScanDataParser extends AndroidTestCase {
 
 	//from dev branch
 
+	
+	//write by yadiYan
 
 }
