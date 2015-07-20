@@ -21,11 +21,16 @@ public class TestScanDataParser extends AndroidTestCase {
 		System.out.println(mParser.getUUID(bytes));
 		System.out.println(mParser.getFeatureId(bytes));
 	}
+
 	
 	public void testParseMajor(){
 		
 		System.out.println(mParser.getMajor(bytes));
 	}
 	// conflict fixed
+
+
+	//from dev branch
+
 
 }
