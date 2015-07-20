@@ -25,6 +25,10 @@ public class TestScanDataParser extends AndroidTestCase {
 	public void testParseMajor(){
 		
 	}
+	
+	public void testParseMinor(){
+		
+	}
 
 
 }
