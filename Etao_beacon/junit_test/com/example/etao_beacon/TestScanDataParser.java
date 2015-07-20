@@ -21,5 +21,6 @@ public class TestScanDataParser extends AndroidTestCase {
 		System.out.println(mParser.getUUID(bytes));
 	}
 
+	//from dev branch
 
 }
