@@ -12,7 +12,7 @@ public interface IParser {
 	 * 获取设备特征码
 	 * @param scanBytes
 	 */
-	String getFeatureId(byte [] scanBytes);
+	int getFeatureId(byte [] scanBytes);
 	
 	
 	/**

@@ -46,7 +46,11 @@ public class BasePaser implements IParser {
 			while (matcher.find()) {
 				mFeatureStartIndex = Integer.parseInt(matcher.group(1));
 				mFeatureEndIndex = Integer.parseInt(matcher.group(2));
-				mDefaultFeature = Integer.parseInt(matcher.group(3));
+				try {
+					mDefaultFeature = Integer.decode(matcher.group(3));
+					
+				} catch (Exception e) {
+				}
 			}
 			
 			matcher = MAJOR_PATTERN.matcher(p);
@@ -103,8 +107,12 @@ public class BasePaser implements IParser {
 	}
 
 	@Override
-	public String getFeatureId(byte[] scanBytes) {
-		return null;
+	public int getFeatureId(byte[] scanBytes) {
+		int feature;
+		byte firstByte = scanBytes[mFeatureStartIndex];
+		byte lastByte = scanBytes[mFeatureEndIndex];
+		feature = ((firstByte << 8) | lastByte);
+		return feature;
 	}
 
 	@Override
