@@ -26,7 +26,6 @@ public class TestScanDataParser extends AndroidTestCase {
 		
 		System.out.println(mParser.getMajor(bytes));
 	}
-	
-
+	// conflict fixed
 
 }
