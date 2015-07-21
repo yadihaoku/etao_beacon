@@ -1,23 +1,21 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.etao_beacon"
+    package="com.etao.ble"
     android:versionCode="1"
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="19"
+        android:minSdkVersion="14"
         android:targetSdkVersion="19" />
 
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
-    
-  <uses-permission android:name="android.permission.RUN_INSTRUMENTATION" />
 
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
-        <activity android:name="com.example.etao_beacon.ScanBlueTooth" >
+        <activity android:name="com.etao.ble.ScanBlueTooth" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -27,10 +25,10 @@
 
         <uses-library android:name="android.test.runner" />
     </application>
-	
+
     <instrumentation
         android:name="android.test.InstrumentationTestRunner"
-        android:targetPackage="com.example.etao_beacon" >
+        android:targetPackage="com.etao.ble" >
     </instrumentation>
 
 </manifest>

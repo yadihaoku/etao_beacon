@@ -67,4 +67,13 @@
         android:layout_centerHorizontal="true" >
     </ListView>
 
+    <Button
+        android:id="@+id/btn_start_scan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tv_status"
+        android:layout_below="@+id/tv_major"
+        android:layout_marginTop="22dp"
+        android:text="Button" />
+
 </RelativeLayout>
