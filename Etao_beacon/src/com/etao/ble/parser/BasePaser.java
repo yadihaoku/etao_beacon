@@ -1,8 +1,9 @@
-package com.etao.ble;
+package com.etao.ble.parser;
 
-import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import com.etao.ble.entity.Beacon;
 
 public class BasePaser implements IParser {
 
@@ -36,7 +37,11 @@ public class BasePaser implements IParser {
 		splitLayout(pattern_layout);
 	}
 
-
+	
+	/**
+	 * 解析指定的 数据字段 布局
+	 * @param layout
+	 */
 	private void splitLayout(String layout) {
 		String patterns[] = layout.split(",");
 		for (String p : patterns) {
@@ -67,8 +72,8 @@ public class BasePaser implements IParser {
 			
 			matcher = MINOR_PATTERN.matcher(p);
 			while(matcher.find()){
-				mMinorEndIndex = Integer.parseInt(matcher.group(1));
-				mMajorStartIndex = Integer.parseInt(matcher.group(2));
+				mMinorStartIndex = Integer.parseInt(matcher.group(1));
+				mMinorEndIndex = Integer.parseInt(matcher.group(2));
 			}
 			
 		}
@@ -106,6 +111,9 @@ public class BasePaser implements IParser {
 		return lastStr;
 	}
 
+	/**
+	 * 获取设备特征 id
+	 */
 	@Override
 	public int getFeatureId(byte[] scanBytes) {
 		int feature;
@@ -115,14 +123,50 @@ public class BasePaser implements IParser {
 		return feature;
 	}
 
+	/*
+	 * 从获取 byte 中获取 major 
+	 * (non-Javadoc)
+	 * @see com.etao.ble.parser.IParser#getMajor(byte[])
+	 */
 	@Override
 	public int getMajor(byte[] scanBytes) {
-		return 0;
+		int major;
+		if(mMajorEndIndex < scanBytes.length)
+		{
+			major = ( scanBytes[mMajorStartIndex] << 8) | scanBytes[mMajorEndIndex];
+		}else{
+			throw new RuntimeException(" scanBytes.lenth = "+ scanBytes.length+ "   MajorEndIndex = "+ mMajorEndIndex);
+		}
+			
+		return major;
 	}
 
+	/**
+	 * 打获取的 byte 中取出 minor
+	 */
 	@Override
 	public int getMinor(byte[] scanBytes) {
-		return 0;
+		int minor;
+		if(mMajorEndIndex < scanBytes.length)
+		{
+			minor = ( scanBytes[mMinorStartIndex] << 8) | scanBytes[mMinorEndIndex];
+		}else{
+			throw new RuntimeException(" scanBytes.lenth = "+ scanBytes.length+ "   MajorEndIndex = "+ mMinorEndIndex);
+		}
+			
+		return minor;
+	}
+
+
+	@Override
+	public Beacon toBeacon(byte[] scanBytes) {
+		Beacon beacon = new Beacon();
+		
+		beacon.setMajor(getMajor(scanBytes));
+		beacon.setMinor(getMinor(scanBytes));
+		beacon.setUuid(getUUID(scanBytes));
+		
+		return beacon;
 	}
 
 }

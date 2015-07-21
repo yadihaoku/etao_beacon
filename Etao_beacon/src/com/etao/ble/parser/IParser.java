@@ -1,4 +1,6 @@
-package com.etao.ble;
+package com.etao.ble.parser;
+
+import com.etao.ble.entity.Beacon;
 
 public interface IParser {
 
@@ -27,5 +29,7 @@ public interface IParser {
 	 */
 	int getMinor(byte [] scanBytes);
 	
+	
+	Beacon toBeacon(byte [] bytes);
 	
 }
